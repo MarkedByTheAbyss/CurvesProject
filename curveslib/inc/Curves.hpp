@@ -1,10 +1,15 @@
-#include <iostream>
+#include <iomanip>
+#include <ostream>
 
 namespace Curve {
 
 struct Point3D {
     double x, y, z;
 };
+inline void operator<<(std::ostream& os, Point3D p) 
+{
+    os << std::fixed << std::setprecision(4) << p.x << ' ' << p.y << ' ' << p.z << '\n';
+}
 
 struct Vector3D {
     double x, y, z;
@@ -49,7 +54,7 @@ private:
 class Helix : public ICurve {
 public:
 
-    Helix(Point3D point, double rad, double step);
+    Helix(Point3D point, double rad, double step) : radius(rad), step(step), center(point) { };
 
     Point3D getPoint(double t) const noexcept override;
     Vector3D getDerivative(double t) const noexcept override;
