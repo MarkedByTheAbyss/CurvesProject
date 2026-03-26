@@ -1,24 +1,8 @@
 #pragma once
-#include <iomanip>
-#include <iostream>
+
+#include "Structs.hxx"
 
 namespace Curve {
-
-struct Point3D {
-    double x, y, z;
-};
-inline void operator<<(std::ostream& os, Point3D p) 
-{
-    os << std::fixed << std::setprecision(4) << p.x << ' ' << p.y << ' ' << p.z << '\n';
-}
-
-struct Vector3D {
-    double x, y, z;
-};
-inline void operator<<(std::ostream& os, Vector3D v) 
-{
-    os << std::fixed << std::setprecision(4) << v.x << ' ' << v.y << ' ' << v.z << '\n';
-}
 
 struct ICurve {
     virtual Point3D getPoint(double) const = 0;
@@ -31,14 +15,14 @@ struct ICurve {
 class Circle : public ICurve {
 public:
 
-    Circle(Point3D point, double rad) : radius(rad), center(point) { };
+    Circle(Point3D point, DoubleWrapper rad) : radius(rad), center(point) { };
 
     Point3D getPoint(double t) const noexcept override;
     Vector3D getDerivative(double t) const noexcept override;
-    virtual void printInfo () const noexcept override;
+    void printInfo () const noexcept override;
 
-private:
-    double radius;
+public:
+    DoubleWrapper radius;
     Point3D center;
 
 };
@@ -46,15 +30,15 @@ private:
 class Ellipse : public ICurve {
 public: 
 
-    Ellipse(Point3D point, double radX, double radY) : radiusX(radX), radiusY(radY), center(point) { };
+    Ellipse(Point3D point, DoubleWrapper radX, DoubleWrapper radY) : radiusX(radX), radiusY(radY), center(point) { };
 
     Point3D getPoint(double t) const noexcept override;
     Vector3D getDerivative(double t) const noexcept override;
-    virtual void printInfo () const noexcept override;
+    void printInfo () const noexcept override;
 
-private: 
-    double radiusX;
-    double radiusY;
+public: 
+    DoubleWrapper radiusX;
+    DoubleWrapper radiusY;
     Point3D center;
 
 };
@@ -62,16 +46,16 @@ private:
 class Helix : public ICurve {
 public:
 
-    Helix(Point3D point, double rad, double step) : radius(rad), step(step), center(point) { };
+    Helix(Point3D point, DoubleWrapper rad, double step) : radius(rad), step(step), center(point) { };
 
     Point3D getPoint(double t) const noexcept override;
     Vector3D getDerivative(double t) const noexcept override;
-    virtual void printInfo () const noexcept override;
+    void printInfo () const noexcept override;
 
-private:
-    double radius;
-    double step;
+public:
+    DoubleWrapper radius;
     Point3D center;
+    double step;
 
 };
 
