@@ -1,5 +1,6 @@
+#pragma once
 #include <iomanip>
-#include <ostream>
+#include <iostream>
 
 namespace Curve {
 
@@ -14,10 +15,15 @@ inline void operator<<(std::ostream& os, Point3D p)
 struct Vector3D {
     double x, y, z;
 };
+inline void operator<<(std::ostream& os, Vector3D v) 
+{
+    os << std::fixed << std::setprecision(4) << v.x << ' ' << v.y << ' ' << v.z << '\n';
+}
 
 struct ICurve {
     virtual Point3D getPoint(double) const = 0;
     virtual Vector3D getDerivative (double) const = 0;
+    virtual void printInfo () const = 0;
 
     virtual ~ICurve() = default;
 };
@@ -29,6 +35,7 @@ public:
 
     Point3D getPoint(double t) const noexcept override;
     Vector3D getDerivative(double t) const noexcept override;
+    virtual void printInfo () const noexcept override;
 
 private:
     double radius;
@@ -43,6 +50,7 @@ public:
 
     Point3D getPoint(double t) const noexcept override;
     Vector3D getDerivative(double t) const noexcept override;
+    virtual void printInfo () const noexcept override;
 
 private: 
     double radiusX;
@@ -58,6 +66,7 @@ public:
 
     Point3D getPoint(double t) const noexcept override;
     Vector3D getDerivative(double t) const noexcept override;
+    virtual void printInfo () const noexcept override;
 
 private:
     double radius;

@@ -15,6 +15,14 @@ namespace Curve {
             0.0 };
     }
 
+    void Circle::printInfo() const noexcept {
+        std::cout << "Info: "
+        << "x: " << center.x << ' '
+        << "y: " << center.y << ' '
+        << "z: " << center.z << ' '
+        << "radius: " << radius << '\n';
+    }
+
     Point3D Ellipse::getPoint(double t) const noexcept {
         return { center.x + radiusX * cos(t), 
             center.y + radiusY * sin(t),
@@ -27,6 +35,15 @@ namespace Curve {
             0.0 };
     }
 
+    void Ellipse::printInfo() const noexcept {
+        std::cout << "Info: "
+        << "x: " << center.x << ' '
+        << "y: " << center.y << ' '
+        << "z: " << center.z << ' '
+        << "radius X: " << radiusX << ' '
+        << "radius Y: " << radiusY << '\n';
+    }
+
     Point3D Helix::getPoint(double t) const noexcept {
         return { center.x + radius * cos(t), 
             center.y + radius * sin(t),
@@ -37,6 +54,15 @@ namespace Curve {
         return { -radius * sin(t),
             radius * cos(t),
             step };
+    }
+
+    void Helix::printInfo() const noexcept {
+        std::cout << "Info: "
+        << "x: " << center.x << ' '
+        << "y: " << center.y << ' '
+        << "z: " << center.z << ' '
+        << "radius: " << radius << ' '
+        << "step: " << step << '\n';
     }
 
 } // namespace Curve
