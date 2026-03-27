@@ -6,22 +6,39 @@
 
 using namespace Curve;
 
+static std::mt19937 rng(std::random_device{}());
+
 double rnd(double min = 0.0, double max = 10.0) {
-    static std::mt19937 rng(std::random_device{}());
     std::uniform_real_distribution<double> dist(min, max);
     return dist(rng);
 }
 
+int rnd(int min, int max) {
+    std::uniform_int_distribution<int> dist(min, max);
+    return dist(rng);
+}
+
 void GenerateCurves(std::vector<std::shared_ptr<ICurve>>& curves) {
-    for (int i = 0; i < 5; ++i) {
-        curves.push_back(std::make_shared<Circle>(Point3D{rnd(), rnd(), rnd()}, rnd()));
+
+    curves.push_back(std::make_shared<Circle>(Point3D{rnd(), rnd(), rnd()}, rnd()));
+    curves.push_back(std::make_shared<Ellipse>(Point3D{rnd(), rnd(), rnd()}, rnd(), rnd()));
+    curves.push_back(std::make_shared<Helix>(Point3D{rnd(), rnd(), rnd()}, rnd(), rnd()));
+    
+    for (int i = 0; i < 12; ++i) {
+        switch (rnd(0, 2)) {
+            case 0: 
+                curves.push_back(std::make_shared<Circle>(Point3D{rnd(), rnd(), rnd()}, rnd()));
+                break;
+            case 1:
+                curves.push_back(std::make_shared<Ellipse>(Point3D{rnd(), rnd(), rnd()}, rnd(), rnd()));
+                break;
+            case 2:
+                curves.push_back(std::make_shared<Helix>(Point3D{rnd(), rnd(), rnd()}, rnd(), rnd()));
+                break;
+        }
     }
-    for (int i = 0; i < 5; ++i) {
-        curves.push_back(std::make_shared<Ellipse>(Point3D{rnd(), rnd(), rnd()}, rnd(), rnd()));
-    }
-    for (int i = 0; i < 5; ++i) {
-        curves.push_back(std::make_shared<Helix>(Point3D{rnd(), rnd(), rnd()}, rnd(), rnd()));
-    }
+
+    std::shuffle(begin(curves), end(curves), rng);
 }
 
 int main() {
