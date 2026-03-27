@@ -46,6 +46,8 @@ int main() {
     std::vector<std::shared_ptr<ICurve>> curves;
     curves.reserve(15);
     GenerateCurves(curves);
+    
+    std::cout << std::fixed << std::setprecision(4);
 
     for (auto& e : curves) {
         std::cout << "Point: " << e->getPoint(1_pi / 4);

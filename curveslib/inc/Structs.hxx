@@ -18,7 +18,7 @@ struct Vector3D {
 };
 inline void operator<<(std::ostream& os, Vector3D v) 
 {
-    os << std::fixed << std::setprecision(4) << v.x << ' ' << v.y << ' ' << v.z << '\n';
+    os << v.x << ' ' << v.y << ' ' << v.z << '\n';
 }
 
 struct DoubleWrapper {

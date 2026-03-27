@@ -41,13 +41,13 @@ namespace Curve {
     Point3D Helix::getPoint(double t) const noexcept {
         return { radius * cos(t), 
             radius * sin(t),
-            step * t};
+            step * t / 2_pi };
     }
 
     Vector3D Helix::getDerivative(double t) const noexcept {
         return { -radius * sin(t),
             radius * cos(t),
-            step };
+            step / 2_pi };
     }
 
     void Helix::printInfo() const noexcept {
