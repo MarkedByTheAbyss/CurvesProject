@@ -4,9 +4,9 @@
 namespace Curve {
 
     Point3D Circle::getPoint(double t) const noexcept {
-        return { center.x + radius * cos(t), 
-            center.y + radius * sin(t),
-            center.z };
+        return { radius * cos(t), 
+            radius * sin(t),
+            0.0 };
     }
 
     Vector3D Circle::getDerivative(double t) const noexcept {
@@ -17,16 +17,13 @@ namespace Curve {
 
     void Circle::printInfo() const noexcept {
         std::cout << "Info: "
-        << "x: " << center.x << ' '
-        << "y: " << center.y << ' '
-        << "z: " << center.z << ' '
         << "radius: " << radius << '\n';
     }
 
     Point3D Ellipse::getPoint(double t) const noexcept {
-        return { center.x + radiusX * cos(t), 
-            center.y + radiusY * sin(t),
-            center.z };
+        return { radiusX * cos(t), 
+            radiusY * sin(t),
+            0.0 };
     }
 
     Vector3D Ellipse::getDerivative(double t) const noexcept {
@@ -37,17 +34,14 @@ namespace Curve {
 
     void Ellipse::printInfo() const noexcept {
         std::cout << "Info: "
-        << "x: " << center.x << ' '
-        << "y: " << center.y << ' '
-        << "z: " << center.z << ' '
         << "radius X: " << radiusX << ' '
         << "radius Y: " << radiusY << '\n';
     }
 
     Point3D Helix::getPoint(double t) const noexcept {
-        return { center.x + radius * cos(t), 
-            center.y + radius * sin(t),
-            center.z + step * t};
+        return { radius * cos(t), 
+            radius * sin(t),
+            step * t};
     }
 
     Vector3D Helix::getDerivative(double t) const noexcept {
@@ -58,9 +52,6 @@ namespace Curve {
 
     void Helix::printInfo() const noexcept {
         std::cout << "Info: "
-        << "x: " << center.x << ' '
-        << "y: " << center.y << ' '
-        << "z: " << center.z << ' '
         << "radius: " << radius << ' '
         << "step: " << step << '\n';
     }

@@ -15,7 +15,7 @@ struct ICurve {
 class Circle : public ICurve {
 public:
 
-    Circle(Point3D point, DoubleWrapper rad) : radius(rad), center(point) { };
+    Circle(DoubleWrapper rad) : radius(rad) { };
 
     Point3D getPoint(double t) const noexcept override;
     Vector3D getDerivative(double t) const noexcept override;
@@ -23,14 +23,13 @@ public:
 
 public:
     DoubleWrapper radius;
-    Point3D center;
 
 };
 
 class Ellipse : public ICurve {
 public: 
 
-    Ellipse(Point3D point, DoubleWrapper radX, DoubleWrapper radY) : radiusX(radX), radiusY(radY), center(point) { };
+    Ellipse(DoubleWrapper radX, DoubleWrapper radY) : radiusX(radX), radiusY(radY) { };
 
     Point3D getPoint(double t) const noexcept override;
     Vector3D getDerivative(double t) const noexcept override;
@@ -39,14 +38,13 @@ public:
 public: 
     DoubleWrapper radiusX;
     DoubleWrapper radiusY;
-    Point3D center;
 
 };
 
 class Helix : public ICurve {
 public:
 
-    Helix(Point3D point, DoubleWrapper rad, double step) : radius(rad), step(step), center(point) { };
+    Helix(DoubleWrapper rad, double step) : radius(rad), step(step) { };
 
     Point3D getPoint(double t) const noexcept override;
     Vector3D getDerivative(double t) const noexcept override;
@@ -54,7 +52,6 @@ public:
 
 public:
     DoubleWrapper radius;
-    Point3D center;
     double step;
 
 };

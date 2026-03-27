@@ -1,6 +1,7 @@
 #include <vector>
 #include <algorithm>
 #include <random>
+#include <memory>
 
 #include "Curves.hpp"
 
@@ -20,20 +21,20 @@ int rnd(int min, int max) {
 
 void GenerateCurves(std::vector<std::shared_ptr<ICurve>>& curves) {
 
-    curves.push_back(std::make_shared<Circle>(Point3D{rnd(), rnd(), rnd()}, rnd()));
-    curves.push_back(std::make_shared<Ellipse>(Point3D{rnd(), rnd(), rnd()}, rnd(), rnd()));
-    curves.push_back(std::make_shared<Helix>(Point3D{rnd(), rnd(), rnd()}, rnd(), rnd()));
+    curves.push_back(std::make_shared<Circle>(rnd()));
+    curves.push_back(std::make_shared<Ellipse>(rnd(), rnd()));
+    curves.push_back(std::make_shared<Helix>(rnd(), rnd()));
     
     for (int i = 0; i < 12; ++i) {
         switch (rnd(0, 2)) {
             case 0: 
-                curves.push_back(std::make_shared<Circle>(Point3D{rnd(), rnd(), rnd()}, rnd()));
+                curves.push_back(std::make_shared<Circle>(rnd()));
                 break;
             case 1:
-                curves.push_back(std::make_shared<Ellipse>(Point3D{rnd(), rnd(), rnd()}, rnd(), rnd()));
+                curves.push_back(std::make_shared<Ellipse>(rnd(), rnd()));
                 break;
             case 2:
-                curves.push_back(std::make_shared<Helix>(Point3D{rnd(), rnd(), rnd()}, rnd(), rnd()));
+                curves.push_back(std::make_shared<Helix>(rnd(), rnd()));
                 break;
         }
     }
@@ -47,7 +48,7 @@ int main() {
     GenerateCurves(curves);
 
     for (auto& e : curves) {
-        std::cout << "Point: " << e->getPoint(1_pi / 2);
+        std::cout << "Point: " << e->getPoint(1_pi / 4);
         std::cout << "Derivative: " << e->getDerivative(1_pi / 4);
         e->printInfo();
         std::cout << std::endl;
