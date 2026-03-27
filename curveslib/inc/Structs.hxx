@@ -22,7 +22,7 @@ inline void operator<<(std::ostream& os, Vector3D v)
 }
 
 struct DoubleWrapper {
-    DoubleWrapper(double num) : value(num) { if (num <= 0.0) throw std::invalid_argument("Value cannot be negative"); }
+    constexpr DoubleWrapper(double num) : value(num) { if (num <= 0.0) throw std::invalid_argument("Value cannot be negative"); }
     operator double() { return value; };
     operator double() const { return value; };
     double value;
