@@ -1,4 +1,5 @@
 #include <iterator>
+#include <memory>
 #include <vector>
 #include <algorithm>
 #include <random>
@@ -7,31 +8,28 @@
 
 using namespace Curve;
 
-double rnd(double min, double max) {
+double rnd(double min = 0.0, double max = 10.0) {
     static std::mt19937 rng(std::random_device{}());
     std::uniform_real_distribution<double> dist(min, max);
     return dist(rng);
 }
 
-void GenerateCurves(std::output_iterator<ICurve*> auto iter) {
-    for (int i = 0; i < 5; ++i, ++iter) {
-        *iter = new Circle({rnd(0.0, 10.0), rnd(0.0, 10.0), rnd(0.0, 10.0)}, 
-        rnd(0.0, 10.0));
+void GenerateCurves(std::vector<std::shared_ptr<ICurve>>& curves) {
+    for (int i = 0; i < 5; ++i) {
+        curves.push_back(std::make_shared<Circle>(Point3D{rnd(), rnd(), rnd()}, rnd()));
     }
-    for (int i = 0; i < 5; ++i, ++iter) {
-        *iter = new Ellipse({rnd(0.0, 10.0), rnd(0.0, 10.0), rnd(0.0, 10.0)}, 
-        rnd(0.0, 10.0), rnd(0.0, 10.0));
+    for (int i = 0; i < 5; ++i) {
+        curves.push_back(std::make_shared<Ellipse>(Point3D{rnd(), rnd(), rnd()}, rnd(), rnd()));
     }
-    for (int i = 0; i < 5; ++i, ++iter) {
-        *iter = new Helix({rnd(0.0, 10.0), rnd(0.0, 10.0), rnd(0.0, 10.0)}, 
-        rnd(0.0, 10.0), rnd(0.0, 10.0));
+    for (int i = 0; i < 5; ++i) {
+        curves.push_back(std::make_shared<Helix>(Point3D{rnd(), rnd(), rnd()}, rnd(), rnd()));
     }
 }
 
 int main() {
-    std::vector<ICurve*> curves;
+    std::vector<std::shared_ptr<ICurve>> curves;
     curves.reserve(15);
-    GenerateCurves(std::back_insert_iterator(curves));
+    GenerateCurves(curves);
 
     for (auto& e : curves) {
         std::cout << "Point: " << e->getPoint(1_pi / 2);
@@ -40,13 +38,12 @@ int main() {
         std::cout << std::endl;
     }
 
-    std::vector<Circle*> circles;
+    std::vector<std::shared_ptr<Circle>> circles;
     for (auto& e : curves) { 
-        Circle* ptr = dynamic_cast<Circle*>(e);
-        if (ptr != nullptr)
+        if (auto ptr = std::dynamic_pointer_cast<Circle>(e))
             circles.push_back(ptr);
     }
-    std::sort(begin(circles), end(circles), [](Circle* lhs, Circle* rhs){
+    std::sort(begin(circles), end(circles), [](auto lhs, auto rhs) {
         return lhs->radius < rhs->radius;
     });
     double sum = 0.0;
@@ -58,5 +55,4 @@ int main() {
     std::cout << std::endl;
     std::cout << "Radii sum of Circles: " << sum << std::endl;
     std::cout << std::endl;
-
 }
