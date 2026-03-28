@@ -52,7 +52,6 @@ int main() {
     for (auto& e : curves) {
         std::cout << "Point: " << e->getPoint(1_pi / 4);
         std::cout << "Derivative: " << e->getDerivative(1_pi / 4);
-        e->printInfo();
         std::cout << std::endl;
     }
 

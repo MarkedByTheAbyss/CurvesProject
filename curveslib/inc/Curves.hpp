@@ -7,7 +7,6 @@ namespace Curve {
 struct ICurve {
     virtual Point3D getPoint(double) const = 0;
     virtual Vector3D getDerivative (double) const = 0;
-    virtual void printInfo () const = 0;
 
     virtual ~ICurve() = default;
 };
@@ -19,7 +18,6 @@ public:
 
     Point3D getPoint(double t) const noexcept override;
     Vector3D getDerivative(double t) const noexcept override;
-    void printInfo () const noexcept override;
     
     double getRadius() const noexcept;
 
@@ -35,7 +33,6 @@ public:
 
     Point3D getPoint(double t) const noexcept override;
     Vector3D getDerivative(double t) const noexcept override;
-    void printInfo () const noexcept override;
 
 private: 
     DoubleWrapper radiusX;
@@ -50,7 +47,6 @@ public:
 
     Point3D getPoint(double t) const noexcept override;
     Vector3D getDerivative(double t) const noexcept override;
-    void printInfo () const noexcept override;
 
 private:
     DoubleWrapper radius;
