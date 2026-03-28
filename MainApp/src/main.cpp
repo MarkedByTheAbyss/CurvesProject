@@ -62,13 +62,13 @@ int main() {
             circles.push_back(ptr);
     }
     std::sort(begin(circles), end(circles), [](auto lhs, auto rhs) {
-        return lhs->radius < rhs->radius;
+        return lhs->getRadius() < rhs->getRadius();
     });
     double sum = 0.0;
     std::cout << "Sorted Circle radii: ";
     for (auto& e : circles) {
-        sum += e->radius;
-        std::cout << e->radius << ' ';
+        sum += e->getRadius();
+        std::cout << e->getRadius() << ' ';
     }
     std::cout << std::endl;
     std::cout << "Radii sum of Circles: " << sum << std::endl;

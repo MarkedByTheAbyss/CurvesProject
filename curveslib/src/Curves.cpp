@@ -20,6 +20,10 @@ namespace Curve {
         << "radius: " << radius << '\n';
     }
 
+    double Circle::getRadius() const noexcept {
+        return radius;
+    }
+
     Point3D Ellipse::getPoint(double t) const noexcept {
         return { radiusX * cos(t), 
             radiusY * sin(t),

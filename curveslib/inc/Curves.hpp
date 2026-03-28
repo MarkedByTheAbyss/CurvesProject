@@ -20,8 +20,10 @@ public:
     Point3D getPoint(double t) const noexcept override;
     Vector3D getDerivative(double t) const noexcept override;
     void printInfo () const noexcept override;
+    
+    double getRadius() const noexcept;
 
-public:
+private:
     DoubleWrapper radius;
 
 };
@@ -35,7 +37,7 @@ public:
     Vector3D getDerivative(double t) const noexcept override;
     void printInfo () const noexcept override;
 
-public: 
+private: 
     DoubleWrapper radiusX;
     DoubleWrapper radiusY;
 
@@ -50,7 +52,7 @@ public:
     Vector3D getDerivative(double t) const noexcept override;
     void printInfo () const noexcept override;
 
-public:
+private:
     DoubleWrapper radius;
     double step;
 
